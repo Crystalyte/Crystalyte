@@ -10,7 +10,284 @@
       font-family: 'Orbitron', sans-serif;
       background-color: #0a0a0a;
       color: #fff;
+      overflow-x: hidden;<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystalyte — Stream Community</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Audiowide', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a);
       overflow-x: hidden;
+      color: #fff;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(255,0,0,0.05),
+        rgba(255,0,0,0.05) 2px,
+        transparent 2px,
+        transparent 10px
+      );
+      z-index: -1;
+      animation: moveBG 10s linear infinite;
+    }
+
+    @keyframes moveBG {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0, 0, 0, 0.6);
+      border-bottom: 2px solid #f33;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 2rem;
+      color: #f33;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #f33;
+    }
+
+    nav a, .dropbtn {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+      background: #f33;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #f33;
+    }
+
+    nav a:hover, .dropbtn:hover {
+      color: #f33;
+      background: #fff;
+      box-shadow: 0 0 20px #fff;
+    }
+
+    .language-switcher {
+      background-color: #111;
+      color: #fff;
+      border: 1px solid #f33;
+      border-radius: 8px;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 100px 20px 60px 20px; /* зверху padding збільшено, щоб header не перекривав */
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2.2rem;
+      color: #f33;
+      text-shadow: 0 0 15px #f33;
+      animation: fadeIn 2s ease;
+    }
+
+    .section p {
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: 0 0 5px #fff;
+      animation: fadeIn 2s ease 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btns a {
+      display: inline-block;
+      background: #f33;
+      color: #fff;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 20px #f33;
+      transition: 0.3s;
+    }
+
+    .btns a:hover {
+      background: #fff;
+      color: #f33;
+      box-shadow: 0 0 25px #fff;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background: rgba(20, 20, 20, 0.9);
+      border: 1px solid #f33;
+      box-shadow: 0 0 20px #f33;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+    }
+
+    th {
+      background: #111;
+      color: #f33;
+    }
+
+    tr:hover {
+      background: rgba(255, 0, 0, 0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      border-top: 1px solid #a00;
+      color: #999;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      display: inline-block;
+      position: relative;
+      margin-left: 10px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #111;
+      min-width: 160px;
+      z-index: 100;
+      border: 1px solid #f33;
+      border-radius: 8px;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: rgba(255,0,0,0.2);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CRYSTALYTE</div>
+  <nav>
+    <a href="#home">Головна</a>
+    <a href="#giveaways">Розіграші</a>
+    <a href="#leaderboard">Лідери</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Warframe</button>
+      <div class="dropdown-content">
+        <a href="https://www.warframe.com/news" target="_blank">Новини</a>
+        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank">Білди</a>
+      </div>
+    </div>
+
+    <select class="language-switcher" id="langSelect">
+      <option value="uk">Українська</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+    </select>
+  </nav>
+</header>
+
+<section class="section" id="home">
+  <h2>Ласкаво просимо до спільноти Crystalyte</h2>
+  <p>Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+  <div class="btns">
+    <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
+    <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
+  </div>
+  <div class="btns">
+    <a href="#" id="twitchLogin">Увійти через Twitch</a>
+  </div>
+</section>
+
+<section class="section" id="giveaways">
+  <h2>🎁 Поточні розіграші</h2>
+  <p>Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
+</section>
+
+<section class="section" id="leaderboard">
+  <h2>🏆 Таблиця лідерів</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Гравець</th>
+        <th>Бали</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboardBody">
+      <tr><td>1</td><td>PlayerOne</td><td>250</td></tr>
+      <tr><td>2</td><td>ShadowWolf</td><td>200</td></tr>
+      <tr><td>3</td><td>RebelTT</td><td>180</td></tr>
+      <tr><td>4</td><td>NeonCat</td><td>150</td></tr>
+      <tr><td>5</td><td>ZeroEdge</td><td>120</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  © 2025 Crystalyte Stream Community — Всі права захищені.
+</footer>
+
+<script>
+  // Twitch Login Button
+  document.getElementById('twitchLogin').addEventListener('click', function(e){
+    e.preventDefault(); // запобігаємо стрибку по #
+    const clientId = 'YOUR_CLIENT_ID';
+    const redirectUri = window.location.origin;
+    const scope = 'user:read:email';
+    const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+    window.location.href = authUrl;
+  });
+</script>
+
+</body>
+</html>
     }<!DOCTYPE html>
 <html lang="uk">
 <head>
