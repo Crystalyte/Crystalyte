@@ -10,7 +10,175 @@
       font-family: 'Orbitron', sans-serif;
       background-color: #0a0a0a;
       color: #fff;<!DOCTYPE html>
+<html lang="uk"><!DOCTYPE html>
 <html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystalyte — Stream Community</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Audiowide', sans-serif; background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a); color: #fff; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05), rgba(255,0,0,0.05) 2px, transparent 2px, transparent 10px); z-index: -1; animation: moveBG 15s linear infinite; }
+  @keyframes moveBG { 0% { background-position: 0 0; } 100% { background-position: 1000px 1000px; } }
+  header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index: 1000; }
+  .logo { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; }
+  nav a, .dropbtn { color: #ccc; margin: 0 8px; text-decoration: none; font-weight: bold; background: #f33; padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #f33; transition: all 0.3s; }
+  nav a:hover, .dropbtn:hover { background: #fff; color: #f33; box-shadow: 0 0 15px #fff; }
+  .language-switcher { background-color: #111; color: #fff; border: 1px solid #f33; border-radius: 6px; padding: 4px; cursor: pointer; }
+  .section { min-height: 100vh; padding: 60px 20px 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .section h2 { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; margin-bottom: 15px; }
+  .section p { font-size: 1.1rem; color: #fff; text-shadow: 0 0 5px #fff; max-width: 600px; }
+  .btns a { display: inline-block; background: #f33; color: #fff; padding: 10px 20px; margin: 5px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 0 15px #f33; transition: 0.3s; }
+  .btns a:hover { background: #fff; color: #f33; box-shadow: 0 0 20px #fff; }
+  table { width: 90%; max-width: 800px; border-collapse: collapse; background: rgba(20,20,20,0.9); border: 1px solid #f33; box-shadow: 0 0 15px #f33; border-radius: 10px; overflow: hidden; margin-top: 20px; }
+  th, td { padding: 10px; border-bottom: 1px solid #333; }
+  th { background: #111; color: #f33; }
+  tr:hover { background: rgba(255,0,0,0.1); }
+  footer { text-align: center; padding: 20px; background: #111; border-top: 1px solid #a00; color: #999; }
+  .dropdown { position: relative; display: inline-block; margin-left: 10px; }
+  .dropdown-content { display: none; position: absolute; background-color: #111; min-width: 140px; z-index: 200; border: 1px solid #f33; border-radius: 6px; }
+  .dropdown-content a { color: white; padding: 10px 14px; text-decoration: none; display: block; }
+  .dropdown-content a:hover { background-color: rgba(255,0,0,0.2); }
+  .dropdown:hover .dropdown-content { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CRYSTALYTE</div>
+  <nav>
+    <a href="#home" class="nav-link">Головна</a>
+    <a href="#giveaways" class="nav-link">Розіграші</a>
+    <a href="#leaderboard" class="nav-link">Лідери</a>
+
+    <div class="dropdown">
+      <button class="dropbtn">Warframe</button>
+      <div class="dropdown-content">
+        <a href="https://www.warframe.com/news" target="_blank">Новини</a>
+        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank">Білди</a>
+      </div>
+    </div>
+
+    <select class="language-switcher" id="langSelect">
+      <option value="uk">Українська</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+    </select>
+  </nav>
+</header>
+
+<section class="section" id="home">
+  <h2>Ласкаво просимо до спільноти Crystalyte</h2>
+  <p>Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+  <div class="btns">
+    <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
+    <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
+    <a href="#" id="twitchLogin">Увійти через Twitch</a>
+  </div>
+</section>
+
+<section class="section" id="giveaways">
+  <h2>🎁 Поточні розіграші</h2>
+  <p>Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
+</section>
+
+<section class="section" id="leaderboard">
+  <h2>🏆 Таблиця лідерів</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Гравець</th><th>Бали</th></tr>
+    </thead>
+    <tbody id="leaderboardBody"></tbody>
+  </table>
+</section>
+
+<footer>© 2025 Crystalyte Stream Community — Всі права захищені.</footer>
+
+<script>
+const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
+const loginBtn = document.getElementById('twitchLogin');
+const leaderboardBody = document.getElementById('leaderboardBody');
+
+// Плавний скрол
+document.querySelectorAll('a.nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Twitch Login
+loginBtn.addEventListener('click', e => {
+  e.preventDefault();
+  const redirectUri = window.location.origin;
+  const scope = 'user:read:email';
+  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+  window.location.href = authUrl;
+});
+
+// LocalStorage для користувачів
+function getToken() {
+  const hash = window.location.hash;
+  if (hash.includes('access_token')) {
+    return new URLSearchParams(hash.substring(1)).get('access_token');
+  }
+  return null;
+}
+
+function addOrUpdateUser(userName) {
+  let users = JSON.parse(localStorage.getItem('leaderboard')) || {};
+  if (!users[userName]) users[userName] = 0;
+  localStorage.setItem('leaderboard', JSON.stringify(users));
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  leaderboardBody.innerHTML = '';
+  let users = JSON.parse(localStorage.getItem('leaderboard')) || {};
+  let sortedUsers = Object.entries(users).sort((a,b)=>b[1]-a[1]);
+  sortedUsers.forEach((u,i)=>{
+    const row = document.createElement('tr');
+    row.innerHTML = `<td>${i+1}</td><td>${u[0]}</td><td>${u[1]}</td>`;
+    leaderboardBody.appendChild(row);
+  });
+}
+
+function addPoints(userName, points){
+  let users = JSON.parse(localStorage.getItem('leaderboard')) || {};
+  if(users[userName]) {
+    users[userName] += points;
+    localStorage.setItem('leaderboard', JSON.stringify(users));
+    renderLeaderboard();
+  }
+}
+
+const token = getToken();
+if(token){
+  fetch('https://api.twitch.tv/helix/users', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Client-Id': CLIENT_ID
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const user = data.data[0];
+    if(user){
+      loginBtn.textContent = `Привіт, ${user.display_name}`;
+      loginBtn.style.pointerEvents = 'none';
+      addOrUpdateUser(user.display_name);
+    }
+  });
+}
+
+// Відобразити таблицю при завантаженні
+renderLeaderboard();
+</script>
+
+</body>
+</html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
