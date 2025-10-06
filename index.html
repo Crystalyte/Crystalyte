@@ -105,7 +105,7 @@ document.querySelectorAll('a.nav-link').forEach(link => {
 const loginBtn = document.getElementById('twitchLogin');
 loginBtn.addEventListener('click', e => {
   e.preventDefault();
-  const redirectUri = "https://crystalyte.github.io/Crystalyte/";
+  const redirectUri = window.location.origin;
   const scope = 'user:read:email';
   const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
   window.location.href = authUrl;
