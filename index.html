@@ -5,65 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystalyte — Stream Community</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-
-* { box-sizing: border-box; margin:0; padding:0; }
-body { font-family: 'Audiowide', sans-serif; background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a); color:#fff; overflow-x:hidden; }
-body::before { content:''; position: fixed; top:0; left:0; width:100%; height:100%; background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05), rgba(255,0,0,0.05) 2px, transparent 2px, transparent 10px); z-index:-1; animation: moveBG 15s linear infinite; }
-@keyframes moveBG {0%{background-position:0 0;}100%{background-position:1000px 1000px;}}
-
-header { position:fixed; top:0; width:100%; background: rgba(0,0,0,0.85); display:flex; justify-content: space-between; align-items:center; padding:15px 50px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index:1000; }
-.logo img { height:50px; }
-nav a, .dropbtn { color: #ccc; margin: 0 8px; text-decoration:none; font-weight:bold; background:#f33; padding:8px 12px; border-radius:6px; cursor:pointer; box-shadow:0 0 10px #f33; transition: all 0.3s; }
-nav a:hover, .dropbtn:hover { background:#fff; color:#f33; box-shadow:0 0 15px #fff; }
-.language-switcher { background-color:#111; color:#fff; border:1px solid #f33; border-radius:6px; padding:4px; cursor:pointer; }
-.section { min-height:100vh; padding: 60px 20px 40px 20px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
-.section h2 { font-size:2rem; color:#f33; text-shadow:0 0 10px #f33; margin-bottom:15px; }
-.section p { font-size:1.1rem; color:#fff; text-shadow:0 0 5px #fff; max-width:600px; }
-.btns a { display:inline-block; background:#f33; color:#fff; padding:10px 20px; margin:5px; border-radius:6px; text-decoration:none; font-weight:bold; box-shadow:0 0 15px #f33; transition:0.3s; }
-.btns a:hover { background:#fff; color:#f33; box-shadow:0 0 20px #fff; }
-
-.tab-container { display:flex; justify-content:center; margin-top:20px; }
-.tab { padding:10px 20px; margin:0 5px; cursor:pointer; background:#222; border-radius:6px; border:1px solid #f33; box-shadow:0 0 10px #f33; transition:0.3s; }
-.tab.active { background:#f33; color:#fff; box-shadow:0 0 15px #fff; }
-
-#adminForm { display:none; flex-direction:column; margin-top:20px; background:rgba(20,20,20,0.9); padding:20px; border-radius:10px; width:90%; max-width:500px; }
-#adminForm input, #adminForm textarea { margin-bottom:10px; padding:8px; border-radius:6px; border:none; width:100%; }
-#adminForm button { background:#f33; color:#fff; padding:10px; border-radius:6px; cursor:pointer; font-weight:bold; transition:0.3s; }
-#adminForm button:hover { background:#fff; color:#f33; }
-
-.content-item { background: rgba(30,30,30,0.8); margin:10px 0; padding:10px; border-radius:8px; width:90%; max-width:600px; text-align:left; }
-.content-item img { max-width:100%; border-radius:6px; margin-bottom:5px; }
-
-.dropdown { position: relative; display:inline-block; margin-left:10px; }
-.dropdown-content { display:none; position:absolute; background-color:#111; min-width:140px; z-index:200; border:1px solid #f33; border-radius:6px; }
-.dropdown-content a { color:white; padding:10px 14px; text-decoration:none; display:block; }
-.dropdown-content a:hover { background-color: rgba(255,0,0,0.2); }
-.dropdown:hover .dropdown-content { display:block; }
-
-table { width:90%; max-width:800px; border-collapse: collapse; background: rgba(20,20,20,0.9); border: 1px solid #f33; box-shadow: 0 0 15px #f33; border-radius:10px; overflow:hidden; margin-top:20px; }
-th, td { padding:10px; border-bottom:1px solid #333; }
-th { background:#111; color:#f33; }
-tr:hover { background: rgba(255,0,0,0.1); }
-footer { text-align:center; padding:20px; background:#111; border-top:1px solid #a00; color:#999; }
+  @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Audiowide', sans-serif; background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a); color: #fff; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05), rgba(255,0,0,0.05) 2px, transparent 2px, transparent 10px); z-index: -1; animation: moveBG 15s linear infinite; }
+  @keyframes moveBG { 0% { background-position: 0 0; } 100% { background-position: 1000px 1000px; } }
+  header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index: 1000; }
+  .logo { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; }
+  nav a, .dropbtn { color: #ccc; margin: 0 8px; text-decoration: none; font-weight: bold; background: #f33; padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #f33; transition: all 0.3s; }
+  nav a:hover, .dropbtn:hover { background: #fff; color: #f33; box-shadow: 0 0 15px #fff; }
+  .language-switcher { background-color: #111; color: #fff; border: 1px solid #f33; border-radius: 6px; padding: 4px; cursor: pointer; }
+  .section { min-height: 100vh; padding: 60px 20px 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .section h2 { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; margin-bottom: 15px; }
+  .section p { font-size: 1.1rem; color: #fff; text-shadow: 0 0 5px #fff; max-width: 600px; }
+  .btns a { display: inline-block; background: #f33; color: #fff; padding: 10px 20px; margin: 5px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 0 15px #f33; transition: 0.3s; }
+  .btns a:hover { background: #fff; color: #f33; box-shadow: 0 0 20px #fff; }
+  table { width: 90%; max-width: 800px; border-collapse: collapse; background: rgba(20,20,20,0.9); border: 1px solid #f33; box-shadow: 0 0 15px #f33; border-radius: 10px; overflow: hidden; margin-top: 20px; }
+  th, td { padding: 10px; border-bottom: 1px solid #333; }
+  th { background: #111; color: #f33; }
+  tr:hover { background: rgba(255,0,0,0.1); }
+  footer { text-align: center; padding: 20px; background: #111; border-top: 1px solid #a00; color: #999; }
+  .dropdown { position: relative; display: inline-block; margin-left: 10px; }
+  .dropdown-content { display: none; position: absolute; background-color: #111; min-width: 140px; z-index: 200; border: 1px solid #f33; border-radius: 6px; }
+  .dropdown-content a { color: white; padding: 10px 14px; text-decoration: none; display: block; }
+  .dropdown-content a:hover { background-color: rgba(255,0,0,0.2); }
+  .dropdown:hover .dropdown-content { display: block; }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <img src="https://drive.google.com/uc?export=view&id=1OnidvLIrXSTMCxE6KpdW7g15H0YIrppR" alt="Crystalyte Logo">
-  </div>
+  <div class="logo">CRYSTALYTE</div>
   <nav>
-    <a href="#home" class="nav-link" data-text-uk="Головна" data-text-ru="Главная" data-text-en="Home">Головна</a>
-    <a href="#giveaways" class="nav-link" data-text-uk="Розіграші" data-text-ru="Розыгрыши" data-text-en="Giveaways">Розіграші</a>
-    <a href="#leaderboard" class="nav-link" data-text-uk="Лідери" data-text-ru="Лидеры" data-text-en="Leaderboard">Лідери</a>
+    <a href="#home" class="nav-link">Головна</a>
+    <a href="#giveaways" class="nav-link">Розіграші</a>
+    <a href="#leaderboard" class="nav-link">Лідери</a>
 
     <div class="dropdown">
-      <button class="dropbtn" data-text-uk="Warframe" data-text-ru="Warframe" data-text-en="Warframe">Warframe</button>
+      <button class="dropbtn">Warframe</button>
       <div class="dropdown-content">
-        <a href="#" class="tab-link" data-tab="news" data-text-uk="Новини" data-text-ru="Новости" data-text-en="News">Новини</a>
-        <a href="#" class="tab-link" data-tab="builds" data-text-uk="Білди" data-text-ru="Билды" data-text-en="Builds">Білди</a>
+        <a href="https://www.warframe.com/news" target="_blank">Новини</a>
+        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank">Білди</a>
       </div>
     </div>
 
@@ -72,29 +54,29 @@ footer { text-align:center; padding:20px; background:#111; border-top:1px solid 
       <option value="ru">Русский</option>
       <option value="en">English</option>
     </select>
-
-    <a href="#" id="twitchLogin" 
-       data-text-uk="Авторизація" 
-       data-text-ru="Авторизация" 
-       data-text-en="Login">Авторизація</a>
   </nav>
 </header>
 
 <section class="section" id="home">
-  <h2 data-text-uk="Ласкаво просимо до спільноти Crystalyte" data-text-ru="Добро пожаловать в сообщество Crystalyte" data-text-en="Welcome to Crystalyte Community">Ласкаво просимо до спільноти Crystalyte</h2>
-  <p data-text-uk="Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!" data-text-ru="Следите за стримами, участвуйте в розыгрышах и поднимайтесь в таблице лидеров!" data-text-en="Follow streams, join giveaways, and climb the leaderboard!">Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+  <h2>Ласкаво просимо до спільноти Crystalyte</h2>
+  <p>Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+  <div class="btns">
+    <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
+    <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
+    <a href="#" id="twitchLogin">Увійти через Twitch</a>
+  </div>
 </section>
 
 <section class="section" id="giveaways">
-  <h2 data-text-uk="🎁 Поточні розіграші" data-text-ru="🎁 Текущие розыгрыши" data-text-en="🎁 Current Giveaways">🎁 Поточні розіграші</h2>
-  <p data-text-uk="Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут." data-text-ru="Участвуйте в розыгрышах прямо во время стрима! Проверяйте обновления здесь." data-text-en="Join giveaways during the stream! Check updates here.">Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
+  <h2>🎁 Поточні розіграші</h2>
+  <p>Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
 </section>
 
 <section class="section" id="leaderboard">
-  <h2 data-text-uk="🏆 Таблиця лідерів" data-text-ru="🏆 Таблица лидеров" data-text-en="🏆 Leaderboard">🏆 Таблиця лідерів</h2>
+  <h2>🏆 Таблиця лідерів</h2>
   <table>
     <thead>
-      <tr><th>#</th><th data-text-uk="Гравець" data-text-ru="Игрок" data-text-en="Player">Гравець</th><th data-text-uk="Бали" data-text-ru="Баллы" data-text-en="Points">Бали</th></tr>
+      <tr><th>#</th><th>Гравець</th><th>Бали</th></tr>
     </thead>
     <tbody id="leaderboardBody">
       <tr><td>1</td><td>PlayerOne</td><td>250</td></tr>
@@ -106,31 +88,6 @@ footer { text-align:center; padding:20px; background:#111; border-top:1px solid 
   </table>
 </section>
 
-<section class="section" id="warframe">
-  <h2 data-text-uk="Warframe — Контент" data-text-ru="Warframe — Контент" data-text-en="Warframe — Content">Warframe — Контент</h2>
-
-  <!-- Вкладки -->
-  <div class="tab-container">
-    <div class="tab active" data-tab="news" id="tabNews">Новини</div>
-    <div class="tab" data-tab="builds" id="tabBuilds">Білди</div>
-  </div>
-
-  <!-- Контент -->
-  <div id="contentContainer">
-    <div id="newsContent"></div>
-    <div id="buildsContent" style="display:none;"></div>
-  </div>
-
-  <!-- Форма для адміністратора -->
-  <div id="adminForm">
-    <input type="text" id="contentTitle" placeholder="Заголовок">
-    <textarea id="contentText" placeholder="Текст"></textarea>
-    <input type="text" id="contentImg" placeholder="URL зображення (за бажанням)">
-    <button id="addContentBtn">Додати</button>
-  </div>
-
-</section>
-
 <footer>© 2025 Crystalyte Stream Community — Всі права захищені.</footer>
 
 <script>
@@ -138,15 +95,15 @@ const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
 
 // Плавний скрол
 document.querySelectorAll('a.nav-link').forEach(link => {
-  link.addEventListener('click', e=>{
+  link.addEventListener('click', e => {
     e.preventDefault();
-    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior:'smooth' });
+    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
   });
 });
 
 // Twitch Login
 const loginBtn = document.getElementById('twitchLogin');
-loginBtn.addEventListener('click', e=>{
+loginBtn.addEventListener('click', e => {
   e.preventDefault();
   const redirectUri = "https://crystalyte.github.io/Crystalyte/";
   const scope = 'user:read:email';
@@ -154,99 +111,8 @@ loginBtn.addEventListener('click', e=>{
   window.location.href = authUrl;
 });
 
-// Мови
-const langSelect = document.getElementById('langSelect');
-function setLanguage(lang){
-  document.querySelectorAll('[data-text-uk]').forEach(el=>{
-    if(lang==='uk') el.textContent = el.dataset.textUk;
-    if(lang==='ru') el.textContent = el.dataset.textRu;
-    if(lang==='en') el.textContent = el.dataset.textEn;
-  });
-  localStorage.setItem('siteLang', lang);
-}
-const savedLang = localStorage.getItem('siteLang') || 'uk';
-langSelect.value = savedLang;
-setLanguage(savedLang);
-langSelect.addEventListener('change', ()=>setLanguage(langSelect.value));
-
-// Вкладки Warframe
-const tabs = document.querySelectorAll('.tab');
-const newsContent = document.getElementById('newsContent');
-const buildsContent = document.getElementById('buildsContent');
-tabs.forEach(tab=>{
-  tab.addEventListener('click', ()=>{
-    tabs.forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    if(tab.dataset.tab==='news'){ newsContent.style.display='block'; buildsContent.style.display='none'; }
-    if(tab.dataset.tab==='builds'){ newsContent.style.display='none'; buildsContent.style.display='block'; }
-    loadContent(); // завантажуємо дані після перемикання
-  });
-});
-
-// Симуляція адміністратора
-const isAdmin = true; // Поставити false для тестування глядача
-const adminForm = document.getElementById('adminForm');
-if(isAdmin){ adminForm.style.display='flex'; }
-
-// Функції для збереження та завантаження контенту
-function saveContent(){
-  const news = Array.from(newsContent.children).map(item=>({
-    title:item.querySelector('strong')?.textContent||'',
-    text:item.querySelector('p')?.textContent||'',
-    img:item.querySelector('img')?.src||''
-  }));
-  const builds = Array.from(buildsContent.children).map(item=>({
-    title:item.querySelector('strong')?.textContent||'',
-    text:item.querySelector('p')?.textContent||'',
-    img:item.querySelector('img')?.src||''
-  }));
-  localStorage.setItem('wfNews', JSON.stringify(news));
-  localStorage.setItem('wfBuilds', JSON.stringify(builds));
-}
-
-function loadContent(){
-  const newsData = JSON.parse(localStorage.getItem('wfNews')||'[]');
-  const buildsData = JSON.parse(localStorage.getItem('wfBuilds')||'[]');
-
-  newsContent.innerHTML = '';
-  buildsContent.innerHTML = '';
-
-  newsData.forEach(item=>{
-    const div = document.createElement('div');
-    div.classList.add('content-item');
-    div.innerHTML = `${item.img?`<img src="${item.img}">`:''}<strong>${item.title}</strong><p>${item.text}</p>`;
-    newsContent.appendChild(div);
-  });
-  buildsData.forEach(item=>{
-    const div = document.createElement('div');
-    div.classList.add('content-item');
-    div.innerHTML = `${item.img?`<img src="${item.img}">`:''}<strong>${item.title}</strong><p>${item.text}</p>`;
-    buildsContent.appendChild(div);
-  });
-}
-
-// Додавання контенту адміністратором
-document.getElementById('addContentBtn').addEventListener('click', ()=>{
-  const title = document.getElementById('contentTitle').value;
-  const text = document.getElementById('contentText').value;
-  const img = document.getElementById('contentImg').value;
-
-  const container = tabs[0].classList.contains('active') ? newsContent : buildsContent;
-  const div = document.createElement('div');
-  div.classList.add('content-item');
-  div.innerHTML = `${img?`<img src="${img}">`:''}<strong>${title}</strong><p>${text}</p>`;
-  container.appendChild(div);
-
-  document.getElementById('contentTitle').value='';
-  document.getElementById('contentText').value='';
-  document.getElementById('contentImg').value='';
-
-  saveContent();
-});
-
-// Завантаження при старті
-loadContent();
-</script>
-
-</body>
-</html>
+// Отримати токен з URL після редіректу
+function getToken() {
+  const hash = window.location.hash;
+  if (hash.includes('access_token')) {
+    return new URLSearchParams(hash.substring(1)).get('access_token');
