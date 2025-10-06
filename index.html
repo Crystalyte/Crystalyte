@@ -1,155 +1,134 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crystalyte — Stream Community</title>
+<section class="section" id="warframe">
+  <h2>Warframe</h2>
+  <div class="tabs">
+    <button class="tab active" data-tab="news">Новини</button>
+    <button class="tab" data-tab="builds">Білди</button>
+  </div>
+
+  <div id="newsContent" class="content-container"></div>
+  <div id="buildsContent" class="content-container" style="display:none"></div>
+
+  <!-- Форма додавання контенту для адміністратора -->
+  <div id="adminPanel" style="margin-top:20px;">
+    <input type="text" id="contentTitle" placeholder="Заголовок">
+    <textarea id="contentText" placeholder="Текст"></textarea>
+    <input type="text" id="contentImg" placeholder="URL зображення">
+    <button id="addContentBtn">Додати</button>
+  </div>
+</section>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Audiowide', sans-serif; background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a); color: #fff; overflow-x: hidden; }
-  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05), rgba(255,0,0,0.05) 2px, transparent 2px, transparent 10px); z-index: -1; animation: moveBG 15s linear infinite; }
-  @keyframes moveBG { 0% { background-position: 0 0; } 100% { background-position: 1000px 1000px; } }
-  
-  header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index: 1000; }
-  .logo img { height: 50px; width: 50px; }
-  
-  nav a, .dropbtn { color: #ccc; margin: 0 8px; text-decoration: none; font-weight: bold; background: #f33; padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #f33; transition: all 0.3s; }
-  nav a:hover, .dropbtn:hover { background: #fff; color: #f33; box-shadow: 0 0 15px #fff; }
-  
-  .language-switcher { background-color: #111; color: #fff; border: 1px solid #f33; border-radius: 6px; padding: 4px; cursor: pointer; }
-  
-  .section { min-height: 100vh; padding: 60px 20px 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-  .section h2 { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; margin-bottom: 15px; }
-  .section p { font-size: 1.1rem; color: #fff; text-shadow: 0 0 5px #fff; max-width: 600px; }
-  
-  .btns a { display: inline-block; background: #f33; color: #fff; padding: 10px 20px; margin: 5px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 0 15px #f33; transition: 0.3s; }
-  .btns a:hover { background: #fff; color: #f33; box-shadow: 0 0 20px #fff; }
-  
-  table { width: 90%; max-width: 800px; border-collapse: collapse; background: rgba(20,20,20,0.9); border: 1px solid #f33; box-shadow: 0 0 15px #f33; border-radius: 10px; overflow: hidden; margin-top: 20px; }
-  th, td { padding: 10px; border-bottom: 1px solid #333; }
-  th { background: #111; color: #f33; }
-  tr:hover { background: rgba(255,0,0,0.1); }
-  
-  footer { text-align: center; padding: 20px; background: #111; border-top: 1px solid #a00; color: #999; }
-  
-  .dropdown { position: relative; display: inline-block; margin-left: 10px; }
-  .dropdown-content { display: none; position: absolute; background-color: #111; min-width: 140px; z-index: 200; border: 1px solid #f33; border-radius: 6px; }
-  .dropdown-content a { color: white; padding: 10px 14px; text-decoration: none; display: block; }
-  .dropdown-content a:hover { background-color: rgba(255,0,0,0.2); }
-  .dropdown:hover .dropdown-content { display: block; }
+.content-item { background: rgba(20,20,20,0.9); margin:10px; padding:10px; border:1px solid #f33; border-radius:6px; position:relative; }
+.content-item img { max-width:100%; margin-bottom:5px; }
+.editBtn, .delBtn { position:absolute; top:5px; cursor:pointer; padding:3px 6px; border-radius:4px; font-weight:bold; }
+.editBtn { right:35px; background:#f90; color:#111; }
+.delBtn { right:5px; background:#f33; color:#fff; }
 </style>
-</head>
-<body>
-
-<header>
-  <div class="logo">
-    <img src="https://drive.google.com/uc?export=view&id=1OnidvLIrXSTMCxE6KpdW7g15H0YIrppR" alt="Crystalyte Logo">
-  </div>
-  <nav>
-    <a href="#home" class="nav-link" data-text-uk="Головна" data-text-ru="Главная" data-text-en="Home">Головна</a>
-    <a href="#giveaways" class="nav-link" data-text-uk="Розіграші" data-text-ru="Розыгрыши" data-text-en="Giveaways">Розіграші</a>
-    <a href="#leaderboard" class="nav-link" data-text-uk="Лідери" data-text-ru="Лидеры" data-text-en="Leaderboard">Лідери</a>
-
-    <div class="dropdown">
-      <button class="dropbtn" data-text-uk="Warframe" data-text-ru="Warframe" data-text-en="Warframe">Warframe</button>
-      <div class="dropdown-content">
-        <a href="https://www.warframe.com/news" target="_blank">Новини</a>
-        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank">Білди</a>
-      </div>
-    </div>
-
-    <select class="language-switcher" id="langSelect">
-      <option value="uk">Українська</option>
-      <option value="ru">Русский</option>
-      <option value="en">English</option>
-    </select>
-
-    <a href="#" id="twitchLogin">Авторизація</a>
-  </nav>
-</header>
-
-<section class="section" id="home">
-  <h2 data-text-uk="Ласкаво просимо до спільноти Crystalyte"
-      data-text-ru="Добро пожаловать в сообщество Crystalyte"
-      data-text-en="Welcome to Crystalyte Community">Ласкаво просимо до спільноти Crystalyte</h2>
-  <p data-text-uk="Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!"
-     data-text-ru="Следи за стримами, участвуй в розыгрышах и поднимайся в таблице лидеров!"
-     data-text-en="Follow the streams, join giveaways, and climb the leaderboard!">Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
-  <div class="btns">
-    <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
-    <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
-  </div>
-</section>
-
-<section class="section" id="giveaways">
-  <h2 data-text-uk="🎁 Поточні розіграші"
-      data-text-ru="🎁 Текущие розыгрыши"
-      data-text-en="🎁 Current Giveaways">🎁 Поточні розіграші</h2>
-  <p data-text-uk="Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут."
-     data-text-ru="Участвуй в розыгрышах прямо во время стрима! Проверяй обновления здесь."
-     data-text-en="Join giveaways during the stream! Check updates here.">Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
-</section>
-
-<section class="section" id="leaderboard">
-  <h2 data-text-uk="🏆 Таблиця лідерів"
-      data-text-ru="🏆 Таблица лидеров"
-      data-text-en="🏆 Leaderboard">🏆 Таблиця лідерів</h2>
-  <table>
-    <thead>
-      <tr><th>#</th><th>Гравець</th><th>Бали</th></tr>
-    </thead>
-    <tbody id="leaderboardBody">
-      <tr><td>1</td><td>PlayerOne</td><td>250</td></tr>
-      <tr><td>2</td><td>ShadowWolf</td><td>200</td></tr>
-      <tr><td>3</td><td>RebelTT</td><td>180</td></tr>
-      <tr><td>4</td><td>NeonCat</td><td>150</td></tr>
-      <tr><td>5</td><td>ZeroEdge</td><td>120</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<footer>© 2025 Crystalyte Stream Community — Всі права захищені.</footer>
 
 <script>
-const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
+// Tabs
+const tabs = document.querySelectorAll('.tab');
+const newsContent = document.getElementById('newsContent');
+const buildsContent = document.getElementById('buildsContent');
 
-// Плавний скрол
-document.querySelectorAll('a.nav-link').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+tabs.forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    newsContent.style.display = tab.dataset.tab==='news'?'block':'none';
+    buildsContent.style.display = tab.dataset.tab==='builds'?'block':'none';
   });
 });
 
-// Twitch Login
-const loginBtn = document.getElementById('twitchLogin');
-loginBtn.addEventListener('click', e => {
-  e.preventDefault();
-  const redirectUri = window.location.origin;
-  const scope = 'user:read:email';
-  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
-  window.location.href = authUrl;
-});
-
-// Мови
-const langSelect = document.getElementById('langSelect');
-function setLanguage(lang) {
-  document.querySelectorAll('[data-text-uk]').forEach(el => {
-    if(lang === 'uk') el.textContent = el.dataset.textUk;
-    if(lang === 'ru') el.textContent = el.dataset.textRu;
-    if(lang === 'en') el.textContent = el.dataset.textEn;
-  });
-  localStorage.setItem('siteLang', lang);
+// Admin panel visible only for you
+const isAdmin = true; // встанови true якщо ти авторизований адміністратор
+if(!isAdmin){
+  document.getElementById('adminPanel').style.display='none';
 }
 
-// Завантаження мови при старті
-const savedLang = localStorage.getItem('siteLang') || 'uk';
-langSelect.value = savedLang;
-setLanguage(savedLang);
+// Save & Load content
+function saveContent(){
+  const news = Array.from(newsContent.children).map(item=>({
+    title:item.querySelector('strong')?.textContent||'',
+    text:item.querySelector('p')?.textContent||'',
+    img:item.querySelector('img')?.src||''
+  }));
+  const builds = Array.from(buildsContent.children).map(item=>({
+    title:item.querySelector('strong')?.textContent||'',
+    text:item.querySelector('p')?.textContent||'',
+    img:item.querySelector('img')?.src||''
+  }));
+  localStorage.setItem('wfNews', JSON.stringify(news));
+  localStorage.setItem('wfBuilds', JSON.stringify(builds));
+}
 
-langSelect.addEventListener('change', () => setLanguage(langSelect.value));
+function createContentItem(title,text,img){
+  const div = document.createElement('div');
+  div.classList.add('content-item');
+  div.innerHTML = `${img?`<img src="${img}">`:''}<strong>${title}</strong><p>${text}</p>`;
+
+  if(isAdmin){
+    const editBtn = document.createElement('button');
+    editBtn.className='editBtn';
+    editBtn.textContent='✏️';
+    editBtn.onclick = ()=>editContent(div);
+    div.appendChild(editBtn);
+
+    const delBtn = document.createElement('button');
+    delBtn.className='delBtn';
+    delBtn.textContent='❌';
+    delBtn.onclick = ()=>{ div.remove(); saveContent(); };
+    div.appendChild(delBtn);
+  }
+
+  return div;
+}
+
+function loadContent(){
+  const newsData = JSON.parse(localStorage.getItem('wfNews')||'[]');
+  const buildsData = JSON.parse(localStorage.getItem('wfBuilds')||'[]');
+
+  newsContent.innerHTML = '';
+  buildsContent.innerHTML = '';
+
+  newsData.forEach(item=>newsContent.appendChild(createContentItem(item.title,item.text,item.img)));
+  buildsData.forEach(item=>buildsContent.appendChild(createContentItem(item.title,item.text,item.img)));
+}
+
+// Add new content
+document.getElementById('addContentBtn').addEventListener('click', ()=>{
+  const title = document.getElementById('contentTitle').value;
+  const text = document.getElementById('contentText').value;
+  const img = document.getElementById('contentImg').value;
+
+  const container = tabs[0].classList.contains('active') ? newsContent : buildsContent;
+  container.appendChild(createContentItem(title,text,img));
+
+  document.getElementById('contentTitle').value='';
+  document.getElementById('contentText').value='';
+  document.getElementById('contentImg').value='';
+
+  saveContent();
+});
+
+// Edit content
+function editContent(div){
+  const title = prompt("Новий заголовок:", div.querySelector('strong')?.textContent);
+  const text = prompt("Новий текст:", div.querySelector('p')?.textContent);
+  const img = prompt("Новий URL зображення:", div.querySelector('img')?.src||'');
+
+  if(title!==null) div.querySelector('strong').textContent=title;
+  if(text!==null) div.querySelector('p').textContent=text;
+  if(img!==null){
+    if(div.querySelector('img')) div.querySelector('img').src=img;
+    else if(img.trim()!==''){
+      const newImg = document.createElement('img'); newImg.src=img; div.prepend(newImg);
+    }
+  }
+
+  saveContent();
+}
+
+// Initial load
+loadContent();
 </script>
-
-</body>
-</html>
