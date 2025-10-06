@@ -10,22 +10,21 @@
   body { font-family: 'Audiowide', sans-serif; background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a); color: #fff; overflow-x: hidden; }
   body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05), rgba(255,0,0,0.05) 2px, transparent 2px, transparent 10px); z-index: -1; animation: moveBG 15s linear infinite; }
   @keyframes moveBG { 0% { background-position: 0 0; } 100% { background-position: 1000px 1000px; } }
-  header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index: 1000; }
-  .logo { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; }
-  nav a, .dropbtn { color: #ccc; margin: 0 8px; text-decoration: none; font-weight: bold; background: #f33; padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #f33; transition: all 0.3s; }
-  nav a:hover, .dropbtn:hover { background: #fff; color: #f33; box-shadow: 0 0 15px #fff; }
+  header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index: 1000; }
+  .logo img { height: 45px; vertical-align: middle; }
+  nav { display: flex; align-items: center; gap: 10px; }
+  nav a, .dropbtn, .auth-btn { color: #ccc; text-decoration: none; font-weight: bold; background: #f33; padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #f33; transition: all 0.3s; }
+  nav a:hover, .dropbtn:hover, .auth-btn:hover { background: #fff; color: #f33; box-shadow: 0 0 15px #fff; }
   .language-switcher { background-color: #111; color: #fff; border: 1px solid #f33; border-radius: 6px; padding: 4px; cursor: pointer; }
-  .section { min-height: 100vh; padding: 60px 20px 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .section { min-height: 100vh; padding: 80px 20px 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
   .section h2 { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; margin-bottom: 15px; }
   .section p { font-size: 1.1rem; color: #fff; text-shadow: 0 0 5px #fff; max-width: 600px; }
-  .btns a { display: inline-block; background: #f33; color: #fff; padding: 10px 20px; margin: 5px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 0 15px #f33; transition: 0.3s; }
-  .btns a:hover { background: #fff; color: #f33; box-shadow: 0 0 20px #fff; }
   table { width: 90%; max-width: 800px; border-collapse: collapse; background: rgba(20,20,20,0.9); border: 1px solid #f33; box-shadow: 0 0 15px #f33; border-radius: 10px; overflow: hidden; margin-top: 20px; }
   th, td { padding: 10px; border-bottom: 1px solid #333; }
   th { background: #111; color: #f33; }
   tr:hover { background: rgba(255,0,0,0.1); }
   footer { text-align: center; padding: 20px; background: #111; border-top: 1px solid #a00; color: #999; }
-  .dropdown { position: relative; display: inline-block; margin-left: 10px; }
+  .dropdown { position: relative; display: inline-block; }
   .dropdown-content { display: none; position: absolute; background-color: #111; min-width: 140px; z-index: 200; border: 1px solid #f33; border-radius: 6px; }
   .dropdown-content a { color: white; padding: 10px 14px; text-decoration: none; display: block; }
   .dropdown-content a:hover { background-color: rgba(255,0,0,0.2); }
@@ -35,19 +34,23 @@
 <body>
 
 <header>
-  <div class="logo">CRYSTALYTE</div>
+  <div class="logo">
+    <img src="Crystalyte LOGO.png" alt="Crystalyte Logo">
+  </div>
   <nav>
-    <a href="#home" class="nav-link">Головна</a>
-    <a href="#giveaways" class="nav-link">Розіграші</a>
-    <a href="#leaderboard" class="nav-link">Лідери</a>
+    <a href="#home" class="nav-home">Головна</a>
+    <a href="#giveaways" class="nav-giveaways">Розіграші</a>
+    <a href="#leaderboard" class="nav-leaderboard">Лідери</a>
 
     <div class="dropdown">
-      <button class="dropbtn">Warframe</button>
+      <button class="dropbtn nav-warframe">Warframe</button>
       <div class="dropdown-content">
-        <a href="https://www.warframe.com/news" target="_blank">Новини</a>
-        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank">Білди</a>
+        <a href="https://www.warframe.com/news" target="_blank" class="nav-news">Новини</a>
+        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank" class="nav-builds">Білди</a>
       </div>
     </div>
+
+    <button class="auth-btn" id="twitchLogin">Авторизація</button>
 
     <select class="language-switcher" id="langSelect">
       <option value="uk">Українська</option>
@@ -58,25 +61,24 @@
 </header>
 
 <section class="section" id="home">
-  <h2>Ласкаво просимо до спільноти Crystalyte</h2>
-  <p>Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+  <h2 class="home-title">Ласкаво просимо до спільноти Crystalyte</h2>
+  <p class="home-text">Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
   <div class="btns">
     <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
     <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
-    <a href="#" id="twitchLogin">Увійти через Twitch</a>
   </div>
 </section>
 
 <section class="section" id="giveaways">
-  <h2>🎁 Поточні розіграші</h2>
-  <p>Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
+  <h2 class="giveaway-title">🎁 Поточні розіграші</h2>
+  <p class="giveaway-text">Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
 </section>
 
 <section class="section" id="leaderboard">
-  <h2>🏆 Таблиця лідерів</h2>
+  <h2 class="leader-title">🏆 Таблиця лідерів</h2>
   <table>
     <thead>
-      <tr><th>#</th><th>Гравець</th><th>Бали</th></tr>
+      <tr><th>#</th><th class="leader-player">Гравець</th><th class="leader-points">Бали</th></tr>
     </thead>
     <tbody id="leaderboardBody">
       <tr><td>1</td><td>PlayerOne</td><td>250</td></tr>
@@ -93,14 +95,6 @@
 <script>
 const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
 
-// Плавний скрол
-document.querySelectorAll('a.nav-link').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-  });
-});
-
 // Twitch Login
 const loginBtn = document.getElementById('twitchLogin');
 loginBtn.addEventListener('click', e => {
@@ -111,8 +105,65 @@ loginBtn.addEventListener('click', e => {
   window.location.href = authUrl;
 });
 
-// Отримати токен з URL після редіректу
-function getToken() {
-  const hash = window.location.hash;
-  if (hash.includes('access_token')) {
-    return new URLSearchParams(hash.substring(1)).get('access_token');
+// Мови
+const translations = {
+  uk: {
+    home: "Головна", giveaways: "Розіграші", leaderboard: "Лідери",
+    warframe: "Warframe", news: "Новини", builds: "Білди",
+    login: "Авторизація",
+    homeTitle: "Ласкаво просимо до спільноти Crystalyte",
+    homeText: "Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!",
+    giveawayTitle: "🎁 Поточні розіграші",
+    giveawayText: "Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.",
+    leaderTitle: "🏆 Таблиця лідерів",
+    player: "Гравець", points: "Бали"
+  },
+  ru: {
+    home: "Главная", giveaways: "Розыгрыши", leaderboard: "Лидеры",
+    warframe: "Warframe", news: "Новости", builds: "Билды",
+    login: "Авторизация",
+    homeTitle: "Добро пожаловать в сообщество Crystalyte",
+    homeText: "Следи за стримами, участвуй в розыгрышах и поднимайся в таблице лидеров!",
+    giveawayTitle: "🎁 Текущие розыгрыши",
+    giveawayText: "Участвуй в розыгрышах прямо во время стрима! Следи за обновлениями здесь.",
+    leaderTitle: "🏆 Таблица лидеров",
+    player: "Игрок", points: "Очки"
+  },
+  en: {
+    home: "Home", giveaways: "Giveaways", leaderboard: "Leaderboard",
+    warframe: "Warframe", news: "News", builds: "Builds",
+    login: "Login",
+    homeTitle: "Welcome to the Crystalyte Community",
+    homeText: "Follow the streams, join giveaways and climb the leaderboard!",
+    giveawayTitle: "🎁 Current Giveaways",
+    giveawayText: "Join giveaways live during streams! Check for updates here.",
+    leaderTitle: "🏆 Leaderboard",
+    player: "Player", points: "Points"
+  }
+};
+
+const langSelect = document.getElementById('langSelect');
+langSelect.addEventListener('change', () => {
+  const lang = langSelect.value;
+  const t = translations[lang];
+
+  document.querySelector('.nav-home').textContent = t.home;
+  document.querySelector('.nav-giveaways').textContent = t.giveaways;
+  document.querySelector('.nav-leaderboard').textContent = t.leaderboard;
+  document.querySelector('.dropbtn').textContent = t.warframe;
+  document.querySelector('.nav-news').textContent = t.news;
+  document.querySelector('.nav-builds').textContent = t.builds;
+  document.getElementById('twitchLogin').textContent = t.login;
+
+  document.querySelector('.home-title').textContent = t.homeTitle;
+  document.querySelector('.home-text').textContent = t.homeText;
+  document.querySelector('.giveaway-title').textContent = t.giveawayTitle;
+  document.querySelector('.giveaway-text').textContent = t.giveawayText;
+  document.querySelector('.leader-title').textContent = t.leaderTitle;
+  document.querySelector('.leader-player').textContent = t.player;
+  document.querySelector('.leader-points').textContent = t.points;
+});
+</script>
+
+</body>
+</html>
