@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystalyte — Stream Community</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ff0000, #8b0000);
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: white;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff4d4d;
+    }
+
+    .language-switcher {
+      margin-left: 20px;
+      background: transparent;
+      border: 1px solid #ff0000;
+      color: white;
+      padding: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #ff0000;
+      text-shadow: 0 0 10px #ff0000;
+    }
+
+    .leaderboard {
+      margin: 40px auto;
+      max-width: 700px;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .leaderboard th, .leaderboard td {
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .leaderboard th {
+      background: #1a1a1a;
+      color: #ff4d4d;
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+      color: #aaa;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .links a {
+      color: #ff0000;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Crystalyte</h1>
+    <nav>
+      <a href="#home">Головна</a>
+      <a href="#giveaways">Розіграші</a>
+      <a href="#leaderboard">Таблиця лідерів</a>
+      <select class="language-switcher" id="langSelect">
+        <option value="uk">Українська</option>
+        <option value="ru">Русский</option>
+        <option value="en">English</option>
+      </select>
+    </nav>
+  </header>
+
+  <section class="section" id="home">
+    <h2>Ласкаво просимо до спільноти Crystalyte</h2>
+    <p>Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+    <div class="links">
+      <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
+      <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
+    </div>
+  </section>
+
+  <section class="section" id="giveaways">
+    <h2>🎁 Поточні розіграші</h2>
+    <p>Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
+  </section>
+
+  <section class="section" id="leaderboard">
+    <h2>🏆 Таблиця лідерів</h2>
+    <table class="leaderboard">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Гравець</th>
+          <th>Бали</th>
+        </tr>
+      </thead>
+      <tbody id="leaderboardBody">
+        <tr><td>1</td><td>PlayerOne</td><td>250</td></tr>
+        <tr><td>2</td><td>ShadowWolf</td><td>200</td></tr>
+        <tr><td>3</td><td>RebelTT</td><td>180</td></tr>
+        <tr><td>4</td><td>NeonCat</td><td>150</td></tr>
+        <tr><td>5</td><td>ZeroEdge</td><td>120</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    © 2025 Crystalyte Stream Community — Всі права захищені.
+  </footer>
+
+  <script>
+    const translations = {
+      uk: {
+        homeTitle: 'Ласкаво просимо до спільноти Crystalyte',
+        homeText: 'Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!',
+        giveawaysTitle: '🎁 Поточні розіграші',
+        giveawaysText: 'Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.',
+        leaderboardTitle: '🏆 Таблиця лідерів',
+      },
+      ru: {
+        homeTitle: 'Добро пожаловать в сообщество Crystalyte',
+        homeText: 'Следи за стримами, участвуй в розыгрышах и поднимайся в таблице лидеров!',
+        giveawaysTitle: '🎁 Текущие розыгрыши',
+        giveawaysText: 'Участвуй в розыгрышах прямо во время стрима! Проверяй обновления здесь.',
+        leaderboardTitle: '🏆 Таблица лидеров',
+      },
+      en: {
+        homeTitle: 'Welcome to the Crystalyte Community',
+        homeText: 'Watch the streams, join giveaways, and climb the leaderboard!',
+        giveawaysTitle: '🎁 Current Giveaways',
+        giveawaysText: 'Join giveaways live during the stream! Check updates here.',
+        leaderboardTitle: '🏆 Leaderboard',
+      }
+    };
+
+    document.getElementById('langSelect').addEventListener('change', function () {
+      const lang = this.value;
+      const t = translations[lang];
+      document.querySelector('#home h2').textContent = t.homeTitle;
+      document.querySelector('#home p').textContent = t.homeText;
+      document.querySelector('#giveaways h2').textContent = t.giveawaysTitle;
+      document.querySelector('#giveaways p').textContent = t.giveawaysText;
+      document.querySelector('#leaderboard h2').textContent = t.leaderboardTitle;
+    });
+  </script>
+</body>
+</html>
