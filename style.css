@@ -149,4 +149,14 @@ footer {
   border-top: 1px solid #a00;
   color: #999;
 }
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  border-top: 1px solid #a00;
+  color: #999;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 
