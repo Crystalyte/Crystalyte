@@ -1,14 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystalyte — Stream Community</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Audiowide', sans-serif; background: linear-gradient(135deg, #0a0a0a, #111, #0a0a0a); color: #fff; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05), rgba(255,0,0,0.05) 2px, transparent 2px, transparent 10px); z-index: -1; animation: moveBG 15s linear infinite; }
+  @keyframes moveBG { 0% { background-position: 0 0; } 100% { background-position: 1000px 1000px; } }
+  header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; box-shadow: 0 2px 10px rgba(255,0,0,0.3); z-index: 1000; }
+  .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; color: #f33; text-shadow: 0 0 10px #f33; }
+  .logo img { height: 40px; width: 40px; }
+  nav a, .dropbtn, #twitchLogin { color: #fff; margin: 0 8px; text-decoration: none; font-weight: bold; background: #f33; padding: 8px 12px; border-radius: 6px; cursor: pointer; box-shadow: 0 0 10px #f33; transition: all 0.3s; }
+  nav a:hover, .dropbtn:hover, #twitchLogin:hover { background: #fff; color: #f33; box-shadow: 0 0 15px #fff; }
+  .language-switcher { background-color: #111; color: #fff; border: 1px solid #f33; border-radius: 6px; padding: 4px; cursor: pointer; }
+  .section { min-height: 100vh; padding: 80px 20px 40px 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .section h2 { font-size: 2rem; color: #f33; text-shadow: 0 0 10px #f33; margin-bottom: 15px; }
+  .section p { font-size: 1.1rem; color: #fff; text-shadow: 0 0 5px #fff; max-width: 600px; }
+  .btns a { display: inline-block; background: #f33; color: #fff; padding: 10px 20px; margin: 5px; border-radius: 6px; text-decoration: none; font-weight: bold; box-shadow: 0 0 15px #f33; transition: 0.3s; }
+  .btns a:hover { background: #fff; color: #f33; box-shadow: 0 0 20px #fff; }
+  table { width: 90%; max-width: 800px; border-collapse: collapse; background: rgba(20,20,20,0.9); border: 1px solid #f33; box-shadow: 0 0 15px #f33; border-radius: 10px; overflow: hidden; margin-top: 20px; }
+  th, td { padding: 10px; border-bottom: 1px solid #333; }
+  th { background: #111; color: #f33; }
+  tr:hover { background: rgba(255,0,0,0.1); }
+  footer { text-align: center; padding: 20px; background: #111; border-top: 1px solid #a00; color: #999; position: relative; bottom: 0; width: 100%; }
+  .dropdown { position: relative; display: inline-block; margin-left: 10px; }
+  .dropdown-content { display: none; position: absolute; background-color: #111; min-width: 140px; z-index: 200; border: 1px solid #f33; border-radius: 6px; }
+  .dropdown-content a { color: white; padding: 10px 14px; text-decoration: none; display: block; }
+  .dropdown-content a:hover { background-color: rgba(255,0,0,0.2); }
+  .dropdown:hover .dropdown-content { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="Crystalyte Logo">
+    CRYSTALYTE
+  </div>
+  <nav>
+    <a href="#home" class="nav-link" data-i18n="home">Головна</a>
+    <a href="#giveaways" class="nav-link" data-i18n="giveaways">Розіграші</a>
+    <a href="#leaderboard" class="nav-link" data-i18n="leaderboard">Лідери</a>
+
+    <div class="dropdown">
+      <button class="dropbtn" data-i18n="warframe">Warframe</button>
+      <div class="dropdown-content">
+        <a href="https://www.warframe.com/news" target="_blank">Новини</a>
+        <a href="https://warframe.fandom.com/wiki/Warframe_Wiki" target="_blank">Білди</a>
+      </div>
+    </div>
+
+    <a href="#" id="twitchLogin" data-i18n="login">Авторизація</a>
+
+    <select class="language-switcher" id="langSelect">
+      <option value="uk">Українська</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+    </select>
+  </nav>
+</header>
+
+<section class="section" id="home">
+  <h2 data-i18n="welcome">Ласкаво просимо до спільноти Crystalyte</h2>
+  <p data-i18n="participate">Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!</p>
+  <div class="btns">
+    <a href="https://www.twitch.tv/crystalytetv" target="_blank">Twitch</a>
+    <a href="https://t.me/RebelTtV" target="_blank">Telegram</a>
+  </div>
+</section>
+
+<section class="section" id="giveaways">
+  <h2 data-i18n="currentGiveaways">🎁 Поточні розіграші</h2>
+  <p data-i18n="giveawaysDesc">Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.</p>
+</section>
+
+<section class="section" id="leaderboard">
+  <h2 data-i18n="leaderboardTitle">🏆 Таблиця лідерів</h2>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Гравець</th><th>Бали</th></tr>
+    </thead>
+    <tbody id="leaderboardBody">
+      <tr><td>1</td><td>PlayerOne</td><td>250</td></tr>
+      <tr><td>2</td><td>ShadowWolf</td><td>200</td></tr>
+      <tr><td>3</td><td>RebelTT</td><td>180</td></tr>
+      <tr><td>4</td><td>NeonCat</td><td>150</td></tr>
+      <tr><td>5</td><td>ZeroEdge</td><td>120</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer data-i18n="footer">© 2025 Crystalyte Stream Community — Всі права захищені.</footer>
+
 <script>
-// ====== TWITCH LOGIN (залишаємо як було) ======
-const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
+// Плавний скрол
 document.querySelectorAll('a.nav-link').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
   });
 });
-const loginBtn = document.getElementById('twitchLogin');
-loginBtn.addEventListener('click', e => {
+
+// Twitch Login
+const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
+document.getElementById('twitchLogin').addEventListener('click', e => {
   e.preventDefault();
   const redirectUri = window.location.origin;
   const scope = 'user:read:email';
@@ -16,74 +114,53 @@ loginBtn.addEventListener('click', e => {
   window.location.href = authUrl;
 });
 
-// ====== СИСТЕМА ЗМІНИ МОВИ ======
+// Переклади
 const translations = {
   uk: {
-    home: "Головна",
-    giveaways: "Розіграші",
-    leaderboard: "Лідери",
-    warframe: "Warframe",
-    login: "Увійти через Twitch",
+    home: "Головна", giveaways: "Розіграші", leaderboard: "Лідери", warframe: "Warframe", login: "Авторизація",
     footer: "© 2025 Crystalyte Stream Community — Всі права захищені.",
     welcome: "Ласкаво просимо до спільноти Crystalyte",
     participate: "Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!",
-    currentGiveaways: "🎁 Поточні розіграші",
-    giveawaysDesc: "Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.",
+    currentGiveaways: "🎁 Поточні розіграші", giveawaysDesc: "Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.",
     leaderboardTitle: "🏆 Таблиця лідерів"
   },
   ru: {
-    home: "Главная",
-    giveaways: "Розыгрыши",
-    leaderboard: "Лидеры",
-    warframe: "Warframe",
-    login: "Войти через Twitch",
+    home: "Главная", giveaways: "Розыгрыши", leaderboard: "Лидеры", warframe: "Warframe", login: "Авторизация",
     footer: "© 2025 Сообщество Crystalyte Stream — Все права защищены.",
     welcome: "Добро пожаловать в сообщество Crystalyte",
     participate: "Следи за стримами, участвуй в розыгрышах и поднимайся в таблице лидеров!",
-    currentGiveaways: "🎁 Текущие розыгрыши",
-    giveawaysDesc: "Участвуй в розыгрышах прямо во время стрима! Следи за обновлениями здесь.",
+    currentGiveaways: "🎁 Текущие розыгрыши", giveawaysDesc: "Участвуй в розыгрышах прямо во время стрима! Следи за обновлениями здесь.",
     leaderboardTitle: "🏆 Таблица лидеров"
   },
   en: {
-    home: "Home",
-    giveaways: "Giveaways",
-    leaderboard: "Leaderboard",
-    warframe: "Warframe",
-    login: "Login with Twitch",
+    home: "Home", giveaways: "Giveaways", leaderboard: "Leaderboard", warframe: "Warframe", login: "Login",
     footer: "© 2025 Crystalyte Stream Community — All rights reserved.",
     welcome: "Welcome to the Crystalyte Community",
     participate: "Follow the streams, join giveaways, and climb the leaderboard!",
-    currentGiveaways: "🎁 Current Giveaways",
-    giveawaysDesc: "Join giveaways directly during the stream! Check updates here.",
+    currentGiveaways: "🎁 Current Giveaways", giveawaysDesc: "Join giveaways directly during the stream! Check updates here.",
     leaderboardTitle: "🏆 Leaderboard"
   }
 };
 
 function applyLanguage(lang) {
-  document.querySelector('[data-i18n="home"]').textContent = translations[lang].home;
-  document.querySelector('[data-i18n="giveaways"]').textContent = translations[lang].giveaways;
-  document.querySelector('[data-i18n="leaderboard"]').textContent = translations[lang].leaderboard;
-  document.querySelector('[data-i18n="warframe"]').textContent = translations[lang].warframe;
-  document.querySelector('[data-i18n="login"]').textContent = translations[lang].login;
-
-  document.querySelector('footer').textContent = translations[lang].footer;
-  document.querySelector('#home h2').textContent = translations[lang].welcome;
-  document.querySelector('#home p').textContent = translations[lang].participate;
-  document.querySelector('#giveaways h2').textContent = translations[lang].currentGiveaways;
-  document.querySelector('#giveaways p').textContent = translations[lang].giveawaysDesc;
-  document.querySelector('#leaderboard h2').textContent = translations[lang].leaderboardTitle;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = translations[lang][key];
+  });
 }
 
 const langSelect = document.getElementById('langSelect');
 langSelect.addEventListener('change', () => {
-  const selectedLang = langSelect.value;
-  localStorage.setItem('lang', selectedLang);
-  applyLanguage(selectedLang);
+  const lang = langSelect.value;
+  localStorage.setItem('lang', lang);
+  applyLanguage(lang);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const savedLang = localStorage.getItem('lang') || 'uk';
-  langSelect.value = savedLang;
-  applyLanguage(savedLang);
+  const lang = localStorage.getItem('lang') || 'uk';
+  langSelect.value = lang;
+  applyLanguage(lang);
 });
 </script>
+</body>
+</html>
