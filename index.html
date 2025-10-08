@@ -47,3 +47,93 @@
   <footer>© 2025 Crystalyte Stream Community — Всі права захищені.</footer>
 </body>
 </html>
+<script>
+// ====== TWITCH LOGIN (залишаємо як було) ======
+const CLIENT_ID = '543ujogua02pkaqvbgbs1buoas3hek';
+document.querySelectorAll('a.nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+const loginBtn = document.getElementById('twitchLogin');
+loginBtn.addEventListener('click', e => {
+  e.preventDefault();
+  const redirectUri = window.location.origin;
+  const scope = 'user:read:email';
+  const authUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+  window.location.href = authUrl;
+});
+
+// ====== СИСТЕМА ЗМІНИ МОВИ ======
+const translations = {
+  uk: {
+    home: "Головна",
+    giveaways: "Розіграші",
+    leaderboard: "Лідери",
+    warframe: "Warframe",
+    login: "Увійти через Twitch",
+    footer: "© 2025 Crystalyte Stream Community — Всі права захищені.",
+    welcome: "Ласкаво просимо до спільноти Crystalyte",
+    participate: "Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!",
+    currentGiveaways: "🎁 Поточні розіграші",
+    giveawaysDesc: "Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.",
+    leaderboardTitle: "🏆 Таблиця лідерів"
+  },
+  ru: {
+    home: "Главная",
+    giveaways: "Розыгрыши",
+    leaderboard: "Лидеры",
+    warframe: "Warframe",
+    login: "Войти через Twitch",
+    footer: "© 2025 Сообщество Crystalyte Stream — Все права защищены.",
+    welcome: "Добро пожаловать в сообщество Crystalyte",
+    participate: "Следи за стримами, участвуй в розыгрышах и поднимайся в таблице лидеров!",
+    currentGiveaways: "🎁 Текущие розыгрыши",
+    giveawaysDesc: "Участвуй в розыгрышах прямо во время стрима! Следи за обновлениями здесь.",
+    leaderboardTitle: "🏆 Таблица лидеров"
+  },
+  en: {
+    home: "Home",
+    giveaways: "Giveaways",
+    leaderboard: "Leaderboard",
+    warframe: "Warframe",
+    login: "Login with Twitch",
+    footer: "© 2025 Crystalyte Stream Community — All rights reserved.",
+    welcome: "Welcome to the Crystalyte Community",
+    participate: "Follow the streams, join giveaways, and climb the leaderboard!",
+    currentGiveaways: "🎁 Current Giveaways",
+    giveawaysDesc: "Join giveaways directly during the stream! Check updates here.",
+    leaderboardTitle: "🏆 Leaderboard"
+  }
+};
+
+function applyLanguage(lang) {
+  document.querySelector('[data-i18n="home"]').textContent = translations[lang].home;
+  document.querySelector('[data-i18n="giveaways"]').textContent = translations[lang].giveaways;
+  document.querySelector('[data-i18n="leaderboard"]').textContent = translations[lang].leaderboard;
+  document.querySelector('[data-i18n="warframe"]').textContent = translations[lang].warframe;
+  document.querySelector('[data-i18n="login"]').textContent = translations[lang].login;
+
+  document.querySelector('footer').textContent = translations[lang].footer;
+  document.querySelector('#home h2').textContent = translations[lang].welcome;
+  document.querySelector('#home p').textContent = translations[lang].participate;
+  document.querySelector('#giveaways h2').textContent = translations[lang].currentGiveaways;
+  document.querySelector('#giveaways p').textContent = translations[lang].giveawaysDesc;
+  document.querySelector('#leaderboard h2').textContent = translations[lang].leaderboardTitle;
+}
+
+const langSelect = document.getElementById('langSelect');
+langSelect.addEventListener('change', () => {
+  const selectedLang = langSelect.value;
+  localStorage.setItem('lang', selectedLang);
+  applyLanguage(selectedLang);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('lang') || 'uk';
+  langSelect.value = savedLang;
+  applyLanguage(savedLang);
+});
+</script>
+
