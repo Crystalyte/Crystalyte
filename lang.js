@@ -5,9 +5,15 @@ const translations = {
     leaders: "Лідери",
     warframe: "Warframe",
     auth: "Авторизація",
-    welcome: "Ласкаво просимо до Crystalyte Stream Community",
-    description: "Тут ви знайдете розіграші, лідерів та новини Warframe!",
-    rights: "Всі права захищені."
+    rights: "Всі права захищені.",
+    welcome: "Ласкаво просимо до спільноти Crystalyte",
+    desc: "Слідкуй за стрімами, бери участь у розіграшах та піднімайся в таблиці лідерів!",
+    giveawayTitle: "🎁 Поточні розіграші",
+    giveawayDesc: "Бери участь у розіграшах прямо під час стріму! Перевіряй оновлення тут.",
+    wf-news: "📰 Новини Warframe",
+    wf-desc: "Скоро тут будуть оновлення, білди та корисна інформація.",
+    player: "Гравець",
+    points: "Бали"
   },
   ru: {
     home: "Главная",
@@ -15,9 +21,15 @@ const translations = {
     leaders: "Лидеры",
     warframe: "Warframe",
     auth: "Авторизация",
-    welcome: "Добро пожаловать в Crystalyte Stream Community",
-    description: "Здесь вы найдете розыгрыши, лидеров и новости Warframe!",
-    rights: "Все права защищены."
+    rights: "Все права защищены.",
+    welcome: "Добро пожаловать в сообщество Crystalyte",
+    desc: "Следи за стримами, участвуй в розыгрышах и поднимайся в таблице лидеров!",
+    giveawayTitle: "🎁 Текущие розыгрыши",
+    giveawayDesc: "Участвуй в розыгрышах прямо на стриме! Проверяй обновления здесь.",
+    wf-news: "📰 Новости Warframe",
+    wf-desc: "Скоро здесь появятся обновления, билды и полезная информация.",
+    player: "Игрок",
+    points: "Очки"
   },
   en: {
     home: "Home",
@@ -25,31 +37,33 @@ const translations = {
     leaders: "Leaders",
     warframe: "Warframe",
     auth: "Login",
-    welcome: "Welcome to Crystalyte Stream Community",
-    description: "Here you can find giveaways, top players, and Warframe news!",
-    rights: "All rights reserved."
+    rights: "All rights reserved.",
+    welcome: "Welcome to the Crystalyte Community",
+    desc: "Follow the streams, join giveaways, and climb the leaderboard!",
+    giveawayTitle: "🎁 Current Giveaways",
+    giveawayDesc: "Join giveaways during the stream! Check updates here.",
+    wf-news: "📰 Warframe News",
+    wf-desc: "Soon you’ll find updates, builds, and info here.",
+    player: "Player",
+    points: "Points"
   }
 };
 
-const select = document.getElementById("language-select");
+const langSelect = document.getElementById("language-select");
 const elements = document.querySelectorAll("[data-key]");
 
-select.addEventListener("change", () => {
-  const lang = select.value;
-  localStorage.setItem("language", lang);
-  setLanguage(lang);
-});
-
-function setLanguage(lang) {
+function changeLanguage(lang) {
   elements.forEach(el => {
     const key = el.getAttribute("data-key");
-    el.textContent = translations[lang][key];
+    if (translations[lang] && translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
   });
+  localStorage.setItem("lang", lang);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const savedLang = localStorage.getItem("language") || "uk";
-  select.value = savedLang;
-  setLanguage(savedLang);
-});
+langSelect.addEventListener("change", (e) => changeLanguage(e.target.value));
 
+const savedLang = localStorage.getItem("lang") || "uk";
+langSelect.value = savedLang;
+changeLanguage(savedLang);
